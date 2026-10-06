@@ -10,6 +10,8 @@ test("GET to /api/v1/status shoud return 200", async () => {
 
   expect(responseBody.dependencies.database.version).toBeDefined();
 
+  expect(responseBody.dependencies.database.version).toEqual("18.6");
+
   expect(typeof responseBody.dependencies.database.version).toBe("string");
 
   expect(responseBody.dependencies.database.max_connections).toBeDefined();
