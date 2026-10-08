@@ -22,7 +22,7 @@ async function status(request, response) {
     dependencies: {
       database: {
         version: pgVersion,
-        max_connections: maxConnections,
+        max_connections: parseInt(maxConnections),
         active_connections: activeConnections,
       },
     },
