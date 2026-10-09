@@ -11,9 +11,13 @@ async function status(request, response) {
 
   const maxConnections = dbMaxConnectionsResult.rows[0].max_connections;
 
-  const activeConnectionsRes = await database.query(
-    "SELECT count(*)::int FROM pg_stat_activity WHERE datname = current_database();",
-  );
+  const databaseName = process.env.POSTGRES_DB;
+  const activeConnectionsRes = await database.query({
+    text: "SELECT count(*)::int FROM pg_stat_activity WHERE datname = $1;",
+    values: [databaseName],
+  });
+  // "SELECT count(*)::int FROM pg_stat_activity WHERE datname = 'local_db'",
+  // "SELECT count(*)::int FROM pg_stat_activity WHERE datname = current_database();",
 
   const activeConnections = activeConnectionsRes.rows[0].count;
 
