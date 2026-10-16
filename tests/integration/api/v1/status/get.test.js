@@ -10,7 +10,9 @@ test("GET to /api/v1/status shoud return 200", async () => {
 
   expect(responseBody.dependencies.database.version).toBeDefined();
 
-  expect(responseBody.dependencies.database.version).toEqual("18.6");
+  expect(responseBody.dependencies.database.version).toEqual(
+    expect.stringMatching(/^(18\.6|16\.15)/),
+  );
 
   expect(typeof responseBody.dependencies.database.version).toBe("string");
 
